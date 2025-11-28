@@ -55,4 +55,13 @@ router.get("/", async (req, res) => {
   res.json(clients);
 });
 
+router.post("/verify", (req, res) => {
+  const pass = req.body.password;
+  if (pass === process.env.ADMIN_PASSWORD) {
+    return res.json({ success: true });
+  }
+  return res.status(401).json({ success: false, error: "Invalid password" });
+});
+
+
 export default router;
