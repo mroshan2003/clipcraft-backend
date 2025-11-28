@@ -20,8 +20,10 @@ router.post("/upload", adminAuth, upload.single("image"), async (req, res) => {
     const filePath = req.file.path;
 
     const result = await cloudinary.uploader.upload(filePath, {
-      folder: "portfolio",
+        folder: "portfolio",
+        resource_type: "video",   // 🔥 REQUIRED FOR VIDEOS
     });
+
 
     fs.unlinkSync(filePath);
 
