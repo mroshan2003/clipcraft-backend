@@ -56,4 +56,20 @@ router.delete("/:id", adminAuth, async (req, res) => {
   }
 });
 
+router.put("/update-title/:id", adminAuth, async (req, res) => {
+  const { title } = req.body;
+
+  try {
+    const item = await Portfolio.findByIdAndUpdate(
+      req.params.id,
+      { title },
+      { new: true }
+    );
+    res.json({ success: true, item });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
 export default router;

@@ -32,20 +32,31 @@ router.post("/upload", adminAuth, upload.single("logo"), async (req, res) => {
 
     await client.save();
 
-    res.json({ message: "Client added successfully", client });
+    return res.json({
+      success: true,
+      message: "Client added successfully",
+      client
+    });
+
   } catch (error) {
-    res.status(500).json({ error });
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    });
   }
 });
 
+// Delete client
 router.delete("/:id", adminAuth, async (req, res) => {
   try {
     const client = await Client.findByIdAndDelete(req.params.id);
-    if (!client) return res.status(404).json({ error: "Not found" });
+    if (!client)
+      return res.status(404).json({ success: false, error: "Not found" });
 
-    res.json({ success: true, message: "Client removed" });
+    return res.json({ success: true, message: "Client removed" });
+
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -55,6 +66,7 @@ router.get("/", async (req, res) => {
   res.json(clients);
 });
 
+// Verify admin password
 router.post("/verify", (req, res) => {
   const pass = req.body.password;
   if (pass === process.env.ADMIN_PASSWORD) {
@@ -62,6 +74,5 @@ router.post("/verify", (req, res) => {
   }
   return res.status(401).json({ success: false, error: "Invalid password" });
 });
-
 
 export default router;
