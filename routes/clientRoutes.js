@@ -27,7 +27,8 @@ router.post("/upload", adminAuth, upload.single("logo"), async (req, res) => {
 
     const client = new Client({
       name: req.body.name,
-      imageUrl: result.secure_url
+      imageUrl: result.secure_url,
+      link: req.body.link
     });
 
     await client.save();
