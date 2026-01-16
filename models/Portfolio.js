@@ -7,7 +7,6 @@ const portfolioSchema = new mongoose.Schema({
     enum: ["shoot_edit", "edit_only"],
     required: true,
   }
-
 });
 
 export default mongoose.model("Portfolio", portfolioSchema);

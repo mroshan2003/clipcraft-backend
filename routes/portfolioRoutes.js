@@ -20,8 +20,8 @@ router.post("/upload", adminAuth, upload.single("image"), async (req, res) => {
     const filePath = req.file.path;
 
     const result = await cloudinary.uploader.upload(filePath, {
-        folder: "portfolio",
-        resource_type: "video",   // 🔥 REQUIRED FOR VIDEOS
+      folder: "portfolio",
+      resource_type: "video",   // 🔥 REQUIRED FOR VIDEOS
     });
 
 
@@ -29,6 +29,7 @@ router.post("/upload", adminAuth, upload.single("image"), async (req, res) => {
 
     const item = new Portfolio({
       title: req.body.title,
+      category: req.body.category,
       imageUrl: result.secure_url,
     });
 
