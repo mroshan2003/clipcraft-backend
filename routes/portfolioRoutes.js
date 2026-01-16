@@ -28,8 +28,7 @@ router.post("/upload", adminAuth, upload.single("image"), async (req, res) => {
     fs.unlinkSync(filePath);
 
     const item = new Portfolio({
-      title: req.body.title,
-      category: req.body.category,
+      category,
       imageUrl: result.secure_url,
     });
 
