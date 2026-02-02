@@ -17,6 +17,7 @@ cloudinary.config({
 // Upload portfolio image
 router.post("/upload", adminAuth, upload.single("image"), async (req, res) => {
   try {
+    const { category } = req.body;
     const filePath = req.file.path;
 
     const result = await cloudinary.uploader.upload(filePath, {

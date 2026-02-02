@@ -9,7 +9,12 @@ import portfolioRoutes from "./routes/portfolioRoutes.js";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://clipcraftmedia.in",
+    "https://www.clipcraftmedia.in"
+  ]
+}));
 app.use(express.json());
 
 mongoose
