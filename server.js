@@ -42,10 +42,6 @@ app.use(cors({
   credentials: true
 }));
 
-
-// 🔥 REQUIRED for preflight
-app.options("*", cors());
-
 app.use(express.json());
 
 mongoose
