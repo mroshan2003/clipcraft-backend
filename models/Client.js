@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
 const clientSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  link: { type: String, default: "", required: true }
+  name: String,
+  imageUrl: String,
+  publicId: String,
+  link: String
 });
 
 export default mongoose.model("Client", clientSchema);
